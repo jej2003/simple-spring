@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:META-INF/spring/applicationContext.xml</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>rest</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:META-INF/spring/rest-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <multipart-config>
+            <max-file-size>104857600</max-file-size>
+            <max-request-size>104857600</max-request-size>
+            <file-size-threshold>10485760</file-size-threshold>
+        </multipart-config>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>rest</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <resource-ref>
+        <description>JMS Connection Factory</description>
+        <res-ref-name>jms/ConnectionFactory</res-ref-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+        <mapped-name>resources/jms/ConnectionFactory</mapped-name>
+    </resource-ref>
+
+    <resource-ref>
+        <res-ref-name>jms/PrintQueue</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+        <mapped-name>resources/jms/PrintQueue</mapped-name>
+    </resource-ref>
+
+	<resource-ref>
+        <res-ref-name>jms/PersistQueue</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+        <mapped-name>resources/jms/PersistQueue</mapped-name>
+    </resource-ref>
+
+    <persistence-context-ref>
+        <description>Movie persistence</description>
+        <persistence-context-ref-name>persistence/movie-unit</persistence-context-ref-name>
+        <persistence-unit-name>movie-unit</persistence-unit-name>
+        <persistence-context-type>Transaction</persistence-context-type>
+    </persistence-context-ref>
+
+    <resource-ref>
+       <res-ref-name>movieDatabase</res-ref-name>
+       <res-type>javax.sql.DataSource</res-type>
+       <mapped-name>movieDatabase</mapped-name>
+    </resource-ref>
+
+<!--    <persistence-context-ref>
+        <persistence-context-ref-name>persistence/movie-em</persistence-context-ref-name>
+        <persistence-unit-name>movie-unit</persistence-unit-name>
+    </persistence-context-ref>
+
+    <persistence-unit-ref>
+        <persistence-unit-ref-name>persistence/movie-emf</persistence-unit-ref-name>
+        <persistence-unit-name>movie-unit</persistence-unit-name>
+    </persistence-unit-ref> -->
+
+</web-app>
+
