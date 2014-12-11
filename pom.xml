@@ -28,6 +28,7 @@
 	</properties>
 	<build>
 		<defaultGoal>install</defaultGoal>
+		<finalName>simple-spring</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
