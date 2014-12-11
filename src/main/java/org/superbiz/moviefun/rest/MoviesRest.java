@@ -22,6 +22,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
 import org.superbiz.ejb.IMovies;
 
 @Controller
@@ -31,15 +33,15 @@ public class MoviesRest {
 	@Inject
     IMovies movies;
 
-    @RequestMapping(value = "/version", consumes = { "application/json" }, method = RequestMethod.GET)
-    public String version(){
-    	return "1.0";
+    @RequestMapping(value = "/version", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+    public void version(){
     }
 
-    @RequestMapping(value = "/{number}", consumes = { "application/json" }, method = RequestMethod.GET)
-    public String addLots(@PathVariable("number") int howMany) throws Exception{
+    @RequestMapping(value = "/{number}", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+    public void addLots(@PathVariable("number") int howMany) throws Exception{
     	movies.send(howMany);
-    	return "done";
     }
 
 }
