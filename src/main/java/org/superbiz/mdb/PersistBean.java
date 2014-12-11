@@ -31,18 +31,19 @@ public class PersistBean implements MessageListener {
 		int x;
 
 		try {
+			System.out.println("Starting Persist");
 			x = Integer.parseInt(msg.getText());
 			Movie movie = new Movie("director" + x, "title" + x, x);
 			entityManager.persist(movie);
 			final long id = movie.getId();
+			System.out.println("persisted with id: " + id);
 			template.send(new MessageCreator() {
 				@Override
 				public Message createMessage(Session session) throws JMSException {
 					return session.createTextMessage(Long.toString(id));
 				}
 			});
-			System.out.println("Persisted finished, but not yet committed");
-//			Thread.sleep(200);
+
 			System.out.println("Leaving persist, should commit");
 		} catch (Exception e) {
 			e.printStackTrace();

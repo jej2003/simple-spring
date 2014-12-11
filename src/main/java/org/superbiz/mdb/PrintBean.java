@@ -48,7 +48,7 @@ public class PrintBean implements MessageListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		    	System.out.println("Left print");
     }
 }
 //END SNIPPET: code
