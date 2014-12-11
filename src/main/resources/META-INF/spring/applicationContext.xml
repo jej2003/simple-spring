@@ -34,7 +34,7 @@
         <property name="connectionFactory">
             <ref local="jmsFactory" />
         </property>
-        <property name="defaultDestinationName" value="resources/jms/PrintQueue" />
+        <property name="defaultDestinationName" value="PrintQueue" />
         <property name="deliveryPersistent" value="true"/>
     </bean>
 
@@ -42,7 +42,7 @@
         <property name="connectionFactory">
             <ref local="jmsFactory" />
         </property>
-        <property name="defaultDestinationName" value="resources/jms/PersistQueue" />
+        <property name="defaultDestinationName" value="PersistQueue" />
         <property name="deliveryPersistent" value="true"/>
     </bean>
 
@@ -65,8 +65,8 @@
     <bean id="persistBean" class="org.superbiz.mdb.PersistBean"/>
 
     <jms:listener-container container-type="default" connection-factory="jmsFactory" cache="none" transaction-manager="transactionManager" concurrency="1" receive-timeout="1000" prefetch="-1">
-        <jms:listener destination="resources/jms/PrintQueue" ref="printBean" />
-        <jms:listener destination="resources/jms/PersistQueue" ref="persistBean" />
+        <jms:listener destination="PrintQueue" ref="printBean" />
+        <jms:listener destination="PersistQueue" ref="persistBean" />
     </jms:listener-container>
 
 </beans>

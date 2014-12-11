@@ -47,29 +47,27 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <!-- JMS Connection Factories (java:comp/env/jms) -->
     <resource-ref>
         <description>JMS Connection Factory</description>
         <res-ref-name>jms/ConnectionFactory</res-ref-name>
         <res-type>javax.jms.ConnectionFactory</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
-        <mapped-name>resources/jms/ConnectionFactory</mapped-name>
     </resource-ref>
-
+    
     <resource-ref>
+        <description>JMS PrintQueue</description>
         <res-ref-name>jms/PrintQueue</res-ref-name>
         <res-type>javax.jms.Queue</res-type>
         <res-auth>Container</res-auth>
-        <res-sharing-scope>Shareable</res-sharing-scope>
-        <mapped-name>resources/jms/PrintQueue</mapped-name>
     </resource-ref>
 
-	<resource-ref>
+    <resource-ref>
+        <description>JMS PersistQueue</description>
         <res-ref-name>jms/PersistQueue</res-ref-name>
         <res-type>javax.jms.Queue</res-type>
         <res-auth>Container</res-auth>
-        <res-sharing-scope>Shareable</res-sharing-scope>
-        <mapped-name>resources/jms/PersistQueue</mapped-name>
     </resource-ref>
 
     <persistence-context-ref>
@@ -78,22 +76,6 @@
         <persistence-unit-name>movie-unit</persistence-unit-name>
         <persistence-context-type>Transaction</persistence-context-type>
     </persistence-context-ref>
-
-    <resource-ref>
-       <res-ref-name>movieDatabase</res-ref-name>
-       <res-type>javax.sql.DataSource</res-type>
-       <mapped-name>movieDatabase</mapped-name>
-    </resource-ref>
-
-<!--    <persistence-context-ref>
-        <persistence-context-ref-name>persistence/movie-em</persistence-context-ref-name>
-        <persistence-unit-name>movie-unit</persistence-unit-name>
-    </persistence-context-ref>
-
-    <persistence-unit-ref>
-        <persistence-unit-ref-name>persistence/movie-emf</persistence-unit-ref-name>
-        <persistence-unit-name>movie-unit</persistence-unit-name>
-    </persistence-unit-ref> -->
 
 </web-app>
 

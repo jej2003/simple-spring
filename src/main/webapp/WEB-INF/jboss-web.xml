@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    <resource-ref>
+        <res-ref-name>jms/ConnectionFactory</res-ref-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <jndi-name>ConnectionFactory</jndi-name>
+        <jndi-name>java:/JmsXA</jndi-name>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>jms/PrintQueue</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+        <jndi-name>java:/jms/queue/PrintQueue</jndi-name>
+    </resource-ref>
+    
+    <resource-ref>
+        <res-ref-name>jms/PersistQueue</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+        <jndi-name>java:/jms/queue/PersistQueue</jndi-name>
+    </resource-ref>
+</jboss-web>
