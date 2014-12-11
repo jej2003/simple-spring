@@ -1,43 +1,19 @@
 simple-spring
 =============
 
-very simple app to be able to duplicate issue where JTA transactions are not working properly (config?) in Tomee
+very simple app to be able to duplicate issue where JTA transactions are not working properly (config?) in Wildfly
 
-tomee.xml
-=========
+This sample expects the following mysql configuration on localhost
+Database named test
+User test with password password and permissions to test database
 
-<?xml version="1.0" encoding="UTF-8"?>
-<tomee>
-  <!-- see http://tomee.apache.org/containers-and-resources.html -->
-  
-  <Resource id="ActiveMQResourceAdapter" type="ActiveMQResourceAdapter">
-      BrokerXmlConfig=broker:(vm://localhost)
-  </Resource>
+To run
+Download sample configured wildfly https://www.dropbox.com/s/t2siyh5db5xb8i0/wildfly-8.2.0.Final-sample.zip?dl=0
+Unzip and cd to directory
+Run ./bin/standalone.sh -c standalone-full.xml
+Deploy this sample app to wildfly with the following mvn clean package wildfly:deploy
 
-<!-- see http://tomee.apache.org/containers-and-resources.html -->
-  <Resource id="resources/jms/ConnectionFactory" type="javax.jms.ConnectionFactory">
-     ResourceAdapter = ActiveMQResourceAdapter
-  </Resource>
+Then open browser and enter the following
+http://localhost:8080/simple-spring/rest/movies/100
 
-<Resource id="resources/jms/XAConnectionFactory" class-name="org.apache.activemq.ActiveMQXAConnectionFactory">
-	BrokerURL = vm://localhost
-    ResourceAdapter = ActiveMQResourceAdapter
-</Resource>
-
-<Resource id="testxa" class-name="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource">
-   Url jdbc:mysql://localhost:3306/test
-   User root
-</Resource>
-
-<Resource id="movieDatabase" type="DataSource">
-   XaDataSource testxa
-   DataSourceCreator dbcp
-   UserName root
-</Resource>
-
-<Resource id="resources/jms/PrintQueue" type="javax.jms.Queue"/>
-<Resource id="resources/jms/PersistQueue" type="javax.jms.Queue"/>
-
-  <!-- activate next line to be able to deploy applications in apps -->
-  <Deployments dir="apps" />
-</tomee>
+Within the wildfly console wait for the processing to complete and then search for "broken". 100 items should normally be enought to break but higher valules of 500, 5000, or 10000 may be required.
