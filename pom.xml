@@ -27,8 +27,8 @@
 		<atomikos.version>3.8.0</atomikos.version>
 	</properties>
 	<build>
-		<defaultGoal>install</defaultGoal>
 		<finalName>simple-spring</finalName>
+		<defaultGoal>package</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
