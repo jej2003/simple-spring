@@ -35,28 +35,14 @@ import org.superbiz.injection.jpa.Movie;
 @Service
 public class Movies implements IMovies {
 
-	@PersistenceContext
-	private EntityManager entityManager;
-
-//	@Inject
-//	@Named("printQueue")
-//	Queue printQueue;
-
 	@Inject
 	@Named("PersistTemplate")
 	JmsTemplate template;
-
-	@Inject
-	PlatformTransactionManager txManager;
 
 	@Transactional
 	public void send(Integer number) {
 		for (int x = 0; x < number; x++) {
 			templateJms(x);
-//			Movie movie = new Movie("director" + x, "title" + x, x);
-//			entityManager.persist(movie);
-////			doJms(movie);
-//			templateJms(movie);
 		}
 	}
 
